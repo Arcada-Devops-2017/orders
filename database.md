@@ -19,4 +19,5 @@ ShippingMethod
 UserConfirm
 
 ShippingAddress?
+
 EstimatedTime?
