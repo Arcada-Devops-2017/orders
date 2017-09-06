@@ -15,8 +15,8 @@ OrderPrice
 OrderDate
 
 ShippingMethod
+
 UserConfirm
 
 ShippingAddress?
-
 EstimatedTime?
