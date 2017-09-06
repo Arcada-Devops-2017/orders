@@ -1,6 +1,7 @@
 Language and system we use: PHP, MySql
 
 DB structure:
+
 (Primary)Order ID
 
 Product ID  (Obtain from Products)
