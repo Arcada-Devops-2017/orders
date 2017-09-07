@@ -1,0 +1,7 @@
+git clone [URL] //Clones git directory/respository
+git init //Initialize current directory for saving git respository
+git help //All commands with help
+git log //Show what has been sent by users to git respository
+git push //Sends your version of files to respository
+git add [file_name] //Adds file to next commit
+git commit -m "Comment about commit that goes to respository"
