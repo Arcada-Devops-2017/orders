@@ -18,7 +18,7 @@ Get plugins, File->Settings->Plugins, click Browse repositories..., install Pyth
 Find external tools(File->Settings/Preferences)
 Create a new tool
  - name what you want it to be
- - Program -> find python folder and pybot (In scripts folder)
+ - Program -> find python folder and pybot (In scripts folder) (path for Mac: /Library/Frameworks/Python.framework/Versions/2.7/bin/pybot)
  - Parameters -> $FileName$
  - Working directory -> $FileDir$
 After right clicking the .robot file you want to run it on, select external tools and the tool you just created.
