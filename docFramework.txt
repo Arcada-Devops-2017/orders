@@ -1,0 +1,43 @@
+-|Robot Framework|-
+Pre-requisites:
+
+install Python
+if Windows, define in environmental paths path to python folder
+optional: pip
+install robotframework through python
+install selenium2library through python
+
+webdriver for appriopriate browser
+ - incase windows: download driver and put it in C:\Windows
+ - incase mac: get brew.sh -> brew install chromedriver
+
+-|IntelliJ IDEA|-
+
+Get plugins, File->Settings->Plugins, click Browse repositories..., install Python and Robot Framework Support
+
+Find external tools(File->Settings/Preferences)
+Create a new tool
+ - name what you want it to be
+ - Program -> find python folder and pybot (In scripts folder)
+ - Parameters -> $FileName$
+ - Working directory -> $FileDir$
+After right clicking the .robot file you want to run it on, select external tools and the tool you just created.
+
+Incase not working
+ - check Python Console that it has correct interpreter(Use search function to find it under settings)
+ - check project structure/preference if you have included python under SDKs for the project, if not, add it.
+
+
+Extra:
+
+-Windows-
+python -m robot script.robot (Be in folder where script.robot is)
+pyhton -m pip install robotframework-selenium2library==1.8.0
+python -m pip install robotframework
+
+-Mac-
+(same as above but without python -m)
+vim filename.txt -> "enter script+save" -> pybot filename.txt
+
+
+
