@@ -2,7 +2,7 @@
 Pre-requisites:
 
 install Python
-if Windows, define in environmental paths path to python folder
+if Windows, define in environment variables path to python folder
 optional: pip
 install robotframework through python
 install selenium2library through python
