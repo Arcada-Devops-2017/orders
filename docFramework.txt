@@ -4,8 +4,8 @@ Pre-requisites:
 install Python
 if Windows, define in environment variables path to python folder
 optional: pip
-install robotframework through python
-install selenium2library through python
+install robotframework through python [If you are using pip -> pip install robotframework]
+install selenium2library through python [If you are using pip -> pip robotframework-selenium2library]
 
 webdriver for appriopriate browser
  - incase windows: download driver and put it in C:\Windows
@@ -24,7 +24,7 @@ Create a new tool
 After right clicking the .robot file you want to run it on, select external tools and the tool you just created.
 
 Incase not working
- - check Python Console that it has correct interpreter(Use search function to find it under settings)
+ - check Python Console in IntelliJ that it has correct interpreter.  File/Settings/Build, Execution,Deployment/Console/Pyhton Console  
  - check project structure/preference if you have included python under SDKs for the project, if not, add it.
 
 
