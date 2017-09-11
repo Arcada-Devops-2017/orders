@@ -31,9 +31,9 @@ Incase not working
 Extra:
 
 -Windows-
-python -m robot script.robot (Be in folder where script.robot is)
-pyhton -m pip install robotframework-selenium2library==1.8.0
 python -m pip install robotframework
+pyhton -m pip install robotframework-selenium2library==1.8.0
+using outside of intellij -> python -m robot yourscript.robot (Be in folder where yourscript.robot is)
 
 -Mac-
 (same as above but without python -m)
