@@ -1,0 +1,38 @@
+{
+"orders-data":[
+    {
+        "orderId":"",
+        "orderDate":"",
+        //define as many products objekts as you need
+    "product":[
+        {
+            "id": "",
+            "storeId":"",
+            "amount":"",
+             "price":""
+        },
+        {
+            "id": "",
+            "storeId":"",
+            "amount":"",
+             "price":""
+        }
+    ],
+    //maybe
+    "shippingInfo":[
+        {
+            "address":"",
+            "postalCode":"",
+            "country":"",
+            "eta":""
+        },
+        {
+            "address":"",
+            "postalCode":"",
+            "country":"",
+            "eta":""
+        }
+    ]
+    }
+]
+}
