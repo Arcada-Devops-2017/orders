@@ -1,4 +1,4 @@
-Language and system we use: PHP, MySql
+Language and system we use: Java, MySql
 
 DB structure:
 
