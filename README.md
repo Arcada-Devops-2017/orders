@@ -47,7 +47,6 @@ If auth token fails
 }
 ```
 
---
 If failed to get data
 ```
 {
