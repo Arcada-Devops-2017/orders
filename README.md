@@ -12,12 +12,15 @@ If auth token fails
 }
 ```
 Get all data for the user that the auth token represents
+
 http://orders.arcada.nitor.zone/api//FetchAll?AuthTok=””
 
 Get data with specific parameters:
+
 http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””&orderId=””&orderDate=””&product-storeId=””&product-amount=””&product-price=””shippingInfo-firstName&shippingInfo-lastName&shippingInfo-phoneNumber&shippingInfo-address=””&shippingInfo-postalcode=””&shippingInfo-country=””&shippingInfo-eta=””
 
 Ex. If you wanted to get all orders for current user containing product id 1
+
 http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””&product-id=”1”
 ```
 {
