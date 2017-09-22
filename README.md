@@ -82,7 +82,7 @@ http://orders.arcada.nitor.zone/api/SendData?AuthToken=””&orderId=””&pro
 }
 ```
 
-## Error that can be returned
+### Error that can be returned
 ```
 {
    “status”: “401”
