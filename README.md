@@ -6,7 +6,7 @@
 
 Get all data for the user that the auth token represents
 
-http://orders.arcada.nitor.zone/api//FetchAll?AuthTok=””
+http://orders.arcada.nitor.zone/api//FetchAll?AuthToken=””
 
 Get data with specific parameters:
 
