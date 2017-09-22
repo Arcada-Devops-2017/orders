@@ -4,13 +4,6 @@
 
 ### How to get data
 
-If auth token fails
-```
-{
-   “status”: “401”
-   "message": "Invalid authToken"
-}
-```
 Get all data for the user that the auth token represents
 
 http://orders.arcada.nitor.zone/api//FetchAll?AuthTok=””
@@ -46,6 +39,14 @@ http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””&product-id=”1�
 }
 
 ```
+If auth token fails
+```
+{
+   “status”: “401”
+   "message": "Invalid authToken"
+}
+```
+
 --
 If failed to get data
 ```
