@@ -10,7 +10,7 @@ http://orders.arcada.nitor.zone/api/FetchAll?AuthToken=””
 
 ### Get data with specific parameters:
 
-http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””
+http://orders.arcada.nitor.zone/api/FetchData
 
 Ex. If you wanted to get all orders for current user containing product id 1
 
