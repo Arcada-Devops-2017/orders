@@ -57,7 +57,7 @@ http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””&product-id=”1�
 
 ## What kind of format we want order data in
 
-http://orders.arcada.nitor.zone/api/SendData?AuthToken=””&orderId=””&product-storeId=””&product-amount=””&product-price=””shippingInfo-firstName&shippingInfo-lastName&shippingInfo-phoneNumber&shippingInfo-address=””&shippingInfo-postalcode=””&shippingInfo-country=””&shippingInfo-eta=””
+http://orders.arcada.nitor.zone/api/SendData?JsonUrl=""
 
 ```
 {
