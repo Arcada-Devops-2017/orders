@@ -52,9 +52,15 @@ http://orders.arcada.nitor.zone/api/FetchAll
 
 http://orders.arcada.nitor.zone/api/FetchData
 
-Ex. If you wanted to get all orders for current user containing product id 1
+Ex. If you wanted to get specific users order and a specific product of that order.
 
-http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””
+```
+{
+   “authToken”: “”,
+   "orderId": "",
+   "productId":""
+}
+```
 
 ### Response
 
@@ -70,7 +76,7 @@ http://orders.arcada.nitor.zone/api/FetchData?AuthToken=””
 ```
 {
    “status”: “401”
-   "message": "Invalid id"
+   "message": "Invalid id on object"
 }
 ```
 ### Success
