@@ -17,7 +17,7 @@ public class OrdersApplication {
 
         Orders order = new Orders();
 
-        order.setProductId(1);
+        order.setProductId("1");
         order.setProductAmount(1);
         order.setAuthToken("foobar");
 

@@ -3,18 +3,63 @@ package com.orders.devops.orders.controller;
 import com.orders.devops.orders.model.Orders;
 import com.orders.devops.orders.repository.OrdersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api")
 public class OrdersController {
 
     @Autowired
     private OrdersJpaRepository ordersJpaRespository;
 
-    @GetMapping(value ="/all")
+    @PostMapping(value = "/PostData")
+    public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
+        System.out.println(requestDTO.getAuthToken());
+        if(!requestDTO.getAuthToken().equals(null)){
+            checkAuth(requestDTO.getAuthToken());
+            if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
+                //ordersJpaRespository.setProductId(requestDTO.getProductId());
+                //ordersJpaRespository.setStoreId(requestDTO.getStoreId());
+                //ordersJpaRespository.setProductAmount(requestDTO.getProductAmount());
+
+                return new OrdersResponseDTO(ResponseCode.OK);
+            }
+            else{
+                return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "ID, StoreID or Amount was not set");
+
+            }
+
+        }
+        else{
+            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST);
+
+        }
+
+    }
+
+    public void checkAuth(String authToken){
+        //String uri = "auth.arcada.nitor.zone/userinfo.php";
+        String uri = "people.arcada.fi/~santanej/test/test/auth.json";
+        String input = "{\"token\":\""+ authToken +"\"}";
+        HttpEntity<String> entity = new HttpEntity<String>(input, null);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+        System.out.println(response);
+
+
+    }
+
+
+    /*@GetMapping(value ="/all")
     public List<Orders> findAll(){
         return ordersJpaRespository.findAll();
     }
@@ -39,5 +84,5 @@ public class OrdersController {
         }
 
         return new OrdersResponseDTO(ResponseCode.OK);
-    }
+    }*/
 }
