@@ -6,13 +6,8 @@
 
 ### Get all data for the user that the auth token represents
 
-http://orders.arcada.nitor.zone/api/FetchAll
+http://orders.arcada.nitor.zone/api/FetchAll?authToken=""
 
-```
-{
-   "authToken": “”
-}
-```
 
 ### Response
 
@@ -28,21 +23,27 @@ http://orders.arcada.nitor.zone/api/FetchAll
 ```
 {
     "authToken":"",
+    "orderData":[
+    {
     "orderId":"",
     "orderDate":"",
-    "product":[
+    "product":
         {
             "id": "",
             "storeId":"",
             "amount":"",
             "price":""
         },
-          {
+    "orderId":"",
+    "orderDate":"",
+    "product":
+        {
             "id": "",
             "storeId":"",
             "amount":"",
             "price":""
-        }],
+        }
+    }],
 }
 
 ```
@@ -50,17 +51,10 @@ http://orders.arcada.nitor.zone/api/FetchAll
 
 ### Get data with specific parameters:
 
-http://orders.arcada.nitor.zone/api/FetchData
+http://orders.arcada.nitor.zone/api/FetchData?authToken=""&orderId=""
 
-Ex. If you wanted to get specific users order and a specific product of that order.
+Ex. If you wanted to get a users specific order
 
-```
-{
-   “authToken”: “”,
-   "orderId": "",
-   "productId":""
-}
-```
 
 ### Response
 
@@ -76,21 +70,22 @@ Ex. If you wanted to get specific users order and a specific product of that ord
 ```
 {
    “status”: “401”
-   "message": "Invalid id on object"
+   "message": "Invalid orderId"
 }
 ```
 ### Success
 
 ```
 {
+    "authToken":"",
     "orderId":"",
     "orderDate":"",
     "product":
         {
-            "id": "1",
-            "storeId":"1",
-            "amount":"5",
-            "price":"10€"
+            "id": "",
+            "storeId":"",
+            "amount":"",
+            "price":""
         },
 }
 
@@ -104,19 +99,13 @@ http://orders.arcada.nitor.zone/api/PostData
 ```
 {
 "authToken": "",
-"product":[
+"product":
     {
         "id": "",
         "storeId":"",
         "amount":"",
         "price":""
-    }, 
-    {
-        "id": "",
-        "storeId":"",
-        "amount":"",
-        "price":""
-    }],
+    },
 
 }
 ```
