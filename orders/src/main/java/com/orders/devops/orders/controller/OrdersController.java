@@ -3,9 +3,7 @@ package com.orders.devops.orders.controller;
 import com.orders.devops.orders.model.Orders;
 import com.orders.devops.orders.repository.OrdersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +21,9 @@ public class OrdersController {
     public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
         System.out.println(requestDTO.getAuthToken());
         if(!requestDTO.getAuthToken().equals(null)){
-            checkAuth(requestDTO.getAuthToken());
+            String[] AuthCheck = checkAuth(requestDTO.getAuthToken());
+            System.out.println(AuthCheck[0]);
+            /*
             if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
                 //ordersJpaRespository.setProductId(requestDTO.getProductId());
                 //ordersJpaRespository.setStoreId(requestDTO.getStoreId());
@@ -35,29 +35,67 @@ public class OrdersController {
                 return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "ID, StoreID or Amount was not set");
 
             }
-
+*/
         }
         else{
             return new OrdersResponseDTO(ResponseCode.BAD_REQUEST);
 
         }
-
+        return new OrdersResponseDTO(ResponseCode.OK);
     }
 
-    public void checkAuth(String authToken){
+    public String[] checkAuth(String authToken){
         //String uri = "auth.arcada.nitor.zone/userinfo.php";
-        String uri = "people.arcada.fi/~santanej/test/test/auth.json";
+        //The url where to get json from
+        String uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+        //What json is sent to the url
         String input = "{\"token\":\""+ authToken +"\"}";
-        HttpEntity<String> entity = new HttpEntity<String>(input, null);
+
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
-        System.out.println(response);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(input, headers);
 
+        ResponseEntity<AuthResponseDTO> response = restTemplate.exchange(uri, HttpMethod.POST, entity, AuthResponseDTO.class);
 
+        //If request was successful
+        if (response.getStatusCode().equals(HttpStatus.OK)){
+            String[] returnArray = {response.getBody().getFirst_name(),response.getBody().getLast_name(),response.getBody().getUsername()};
+            return returnArray;
+        }else{
+            //Something went wrong.... handle it
+            String[] returnError = {"401"};
+            return returnError;
+        }
+
+    }//checkAuth Ends.
+
+    //ToDo test if json data fetching is correct
+    public String checkProducts(String productId){
+        //String uri = "http://product.arcada.nitor.zone/api/products.php?id=" + productId;
+
+        String uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+        String input = "{\"productId\":\""+ productId +"\"}";
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(input, headers);
+
+        ResponseEntity<ProductResponseDTO> response = restTemplate.exchange(uri, HttpMethod.POST, entity, ProductResponseDTO.class);
+        ///gets price from json
+        double price = response.getBody().getPrice();
+        if(price > 0){
+            System.out.println("Found price for product");
+            return String.valueOf(price);
+        }else{
+            return "Error 404 product not found";
+        }
     }
-
 
     /*@GetMapping(value ="/all")
     public List<Orders> findAll(){
