@@ -22,28 +22,28 @@ http://orders.arcada.nitor.zone/api/FetchAll?authToken=""
 
 ```
 {
-    "authToken":"",
     "orderData":[
-    {
-    "orderId":"",
-    "orderDate":"",
-    "product":
         {
-            "id": "",
-            "storeId":"",
-            "amount":"",
-            "price":""
+            "orderId":"",
+            "orderDate":"",
+            "product": {
+                "id": "",
+                "storeId":"",
+                "amount":"",
+                "price":""
+            }
         },
-    "orderId":"",
-    "orderDate":"",
-    "product":
         {
-            "id": "",
-            "storeId":"",
-            "amount":"",
-            "price":""
+            "orderId":"",
+            "orderDate":"",
+            "product": {
+                "id": "",
+                "storeId":"",
+                "amount":"",
+                "price":""
+            }
         }
-    }],
+    ],
 }
 
 ```
@@ -69,7 +69,7 @@ Ex. If you wanted to get a users specific order
 
 ```
 {
-   “status”: “401”
+   “status”: “400”
    "message": "Invalid orderId"
 }
 ```
@@ -77,16 +77,14 @@ Ex. If you wanted to get a users specific order
 
 ```
 {
-    "authToken":"",
     "orderId":"",
     "orderDate":"",
-    "product":
-        {
-            "id": "",
-            "storeId":"",
-            "amount":"",
-            "price":""
-        },
+    "product": {
+        "id": "",
+        "storeId":"",
+        "amount":"",
+        "price":""
+    },
 }
 
 ```
@@ -98,15 +96,12 @@ http://orders.arcada.nitor.zone/api/PostData
 
 ```
 {
-"authToken": "",
-"product":
-    {
+    "authToken": "",
+    "product":{
         "id": "",
         "storeId":"",
-        "amount":"",
-        "price":""
-    },
-
+        "amount":""
+    }
 }
 ```
 
@@ -122,7 +117,7 @@ http://orders.arcada.nitor.zone/api/PostData
 
 ```
 {
-   “status”: “401”
+   “status”: “400”
    "message": "error in object"
 }
 
