@@ -104,7 +104,7 @@ http://orders.arcada.nitor.zone/api/PostData
 ```
 {
 "authToken": "",
-"product":[]
+"product":[
     {
         "id": "",
         "storeId":"",
