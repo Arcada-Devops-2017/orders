@@ -2,35 +2,45 @@ package com.orders.devops.orders.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Orders {
-
-    private String orderId;
-    private String productId;
-    private int productAmount;
-    private String storeId;
-    private String authToken;
-    private int orderPrice;
-    private boolean userConfirmed;
-
-
     @Id
-    @GeneratedValue
-    public String getOrderId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderId;
+    private Long productId;
+    private int productAmount;
+    private Long storeId;
+    private String authToken;
+    private double orderPrice;
+    private boolean userConfirmed;
+    private String userName;
+
+
+
+
+    protected Orders(){}
+
+    public Orders(String userName,long productId, int productAmount,long storeId,double orderPrice){
+
+    }
+
+
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
-    public String getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 
@@ -42,11 +52,11 @@ public class Orders {
         this.productAmount = productAmount;
     }
 
-    public String getStoreId() {
+    public double getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(String storeId) {
+    public void setStoreId(long storeId) {
         this.storeId = storeId;
     }
 
@@ -58,11 +68,11 @@ public class Orders {
         this.authToken = authToken;
     }
 
-    public int getOrderPrice() {
+    public double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(int orderPrice) {
+    public void setOrderPrice(double orderPrice) {
         this.orderPrice = orderPrice;
     }
 
@@ -73,4 +83,8 @@ public class Orders {
     public void setUserConfirmed(boolean userConfirmed) {
         this.userConfirmed = userConfirmed;
     }
+
+    public String getUserName() { return userName; }
+
+    public void setUserName(String userName) { this.userName = userName; }
 }
