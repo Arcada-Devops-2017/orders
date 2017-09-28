@@ -1,10 +1,15 @@
 package com.orders.devops.orders.controller;
 
-public class ProductResponseDTO {
-    public double price;
+import com.orders.devops.orders.model.Products;
 
-    public double getPrice(){
-            return price;
-    }
+import java.io.Serializable;
+import java.util.List;
+
+public class ProductResponseDTO{
+    public int status;
+    public List<Products> products;
+
 
 }
+
+
