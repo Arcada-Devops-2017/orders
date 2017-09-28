@@ -1,69 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generated="20170913 13:18:16.343" generator="Robot 3.0.2 (Python 2.7.13 on darwin)">
-<suite source="/Users/carolinakarvonen/IdeaProjects/demo/src/main/java/com/example/demo/demo.robot" id="s1" name="Demo">
-<kw type="setup" name="Go to homepage">
-<kw name="Open Browser" library="Selenium2Library">
-<doc>Opens a new browser instance to given URL.</doc>
+<robot generator="Robot 3.0.2 (Python 3.6.2 on win32)" generated="20170928 16:58:40.363">
+<suite id="s1" name="testsTemplate" source="C:\Users\Martti Parikka\Omat tiedostot\arcadaDevOps\ordersNew\orders\demo\src\main\java\com\example\demo\testsTemplate.robot">
+<test id="s1-t1" name="Get page and test if string exists">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>${HOMEPAGE}</arg>
-<arg>${BROWSER}</arg>
+<arg>authApi</arg>
+<arg>${page}</arg>
 </arguments>
-<msg timestamp="20170913 13:18:16.617" level="INFO">Opening browser 'chrome' to base url 'http://www.google.fi'</msg>
-<status status="PASS" endtime="20170913 13:18:23.344" starttime="20170913 13:18:16.616"></status>
+<msg timestamp="20170928 16:58:40.646" level="INFO">Creating Session using : alias=authApi, url=http://samples.openweathermap.org, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20170928 16:58:40.646" endtime="20170928 16:58:40.646"></status>
 </kw>
-<status status="PASS" endtime="20170913 13:18:23.345" starttime="20170913 13:18:16.615"></status>
-</kw>
-<test id="s1-t1" name="Google github and find github">
-<kw name="Google and check results">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
 <arguments>
-<arg>github</arg>
-<arg>https://github.com/</arg>
+<arg>authApi</arg>
+<arg>/pollution/v1/co/0.0,10.0/2016-12-25T01:04:08Z.json?appid=b1b15e88fa797225412429c1c50c122a1</arg>
 </arguments>
-<kw name="Input Text" library="Selenium2Library">
-<doc>Types the given `text` into text field identified by `locator`.</doc>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20170928 16:58:41.053" level="INFO">Get Request using : alias=authApi, uri=/pollution/v1/co/0.0,10.0/2016-12-25T01:04:08Z.json?appid=b1b15e88fa797225412429c1c50c122a1, headers=None json=None</msg>
+<msg timestamp="20170928 16:58:41.053" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20170928 16:58:40.646" endtime="20170928 16:58:41.053"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
 <arguments>
-<arg>id=lst-ib</arg>
-<arg>${searchkey}</arg>
+<arg>${resp}</arg>
 </arguments>
-<msg timestamp="20170913 13:18:23.352" level="INFO">Typing text 'github' into text field 'id=lst-ib'</msg>
-<status status="PASS" endtime="20170913 13:18:25.082" starttime="20170913 13:18:23.351"></status>
+<msg timestamp="20170928 16:58:41.053" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20170928 16:58:41.053" endtime="20170928 16:58:41.053"></status>
 </kw>
-<kw name="Press Key" library="Selenium2Library">
-<doc>Simulates user pressing key on element identified by `locator`.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
 <arguments>
-<arg>name=q</arg>
-<arg>\\13</arg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
 </arguments>
-<status status="PASS" endtime="20170913 13:18:26.652" starttime="20170913 13:18:25.083"></status>
+<msg timestamp="20170928 16:58:41.053" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170928 16:58:41.053" endtime="20170928 16:58:41.053"></status>
 </kw>
-<kw name="Wait Until Page Contains" library="Selenium2Library">
-<doc>Waits until `text` appears on current page.</doc>
-<arguments>
-<arg>${result}</arg>
-</arguments>
-<status status="PASS" endtime="20170913 13:18:27.022" starttime="20170913 13:18:26.652"></status>
-</kw>
-<status status="PASS" endtime="20170913 13:18:27.022" starttime="20170913 13:18:23.349"></status>
-</kw>
-<status status="PASS" endtime="20170913 13:18:27.022" critical="yes" starttime="20170913 13:18:23.345"></status>
+<status status="PASS" starttime="20170928 16:58:40.646" endtime="20170928 16:58:41.053" critical="yes"></status>
 </test>
-<kw type="teardown" name="Close All Browsers" library="Selenium2Library">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" endtime="20170913 13:18:27.266" starttime="20170913 13:18:27.025"></status>
+<test id="s1-t2" name="Dictionary contains key">
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${counter}</arg>
+</arguments>
+<msg timestamp="20170928 16:58:41.068" level="INFO">${counter} = 0</msg>
+<status status="PASS" starttime="20170928 16:58:41.068" endtime="20170928 16:58:41.068"></status>
 </kw>
-<status status="PASS" endtime="20170913 13:18:27.266" starttime="20170913 13:18:16.346"></status>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>\nStarting JSON\n${resp.json()}</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.068" endtime="20170928 16:58:41.084"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>${resp.json()}</arg>
+</arguments>
+<assign>
+<var>${jsonstring}</var>
+</assign>
+<msg timestamp="20170928 16:58:41.084" level="INFO">${jsonstring} = {'time': '2017-01-26T01:04:15Z', 'location': {'latitude': 0, 'longitude': 9.9905}, 'data': [{'precision': -4.999999987376214e-07, 'pressure': 1000, 'value': 9.30106835994593e-08}, {'precision': -4.999...</msg>
+<status status="PASS" starttime="20170928 16:58:41.084" endtime="20170928 16:58:41.084"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${jsonstring}</arg>
+<arg>'</arg>
+<arg>"</arg>
+</arguments>
+<assign>
+<var>${json_string}</var>
+</assign>
+<msg timestamp="20170928 16:58:41.100" level="INFO">${json_string} = {"time": "2017-01-26T01:04:15Z", "location": {"latitude": 0, "longitude": 9.9905}, "data": [{"precision": -4.999999987376214e-07, "pressure": 1000, "value": 9.30106835994593e-08}, {"precision": -4.999...</msg>
+<status status="PASS" starttime="20170928 16:58:41.100" endtime="20170928 16:58:41.100"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>\nConverted JSON:\n${json_string}</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.100" endtime="20170928 16:58:41.100"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.loads('''${json_string}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${json}</var>
+</assign>
+<msg timestamp="20170928 16:58:41.115" level="INFO">${json} = {'time': '2017-01-26T01:04:15Z', 'location': {'latitude': 0, 'longitude': 9.9905}, 'data': [{'precision': -4.999999987376214e-07, 'pressure': 1000, 'value': 9.30106835994593e-08}, {'precision': -4.999...</msg>
+<status status="PASS" starttime="20170928 16:58:41.100" endtime="20170928 16:58:41.115"></status>
+</kw>
+<kw name="${item} IN [ @${json[&quot;data&quot;]} ]" type="for">
+<kw name="${item} = @[{'precision': -4.999999987376214e-07, 'pressure': 1000, 'value': 9.30106835994593e-08}, {'precision': -4.999999987376214e-07, 'pressure': 681.2920532226562, 'value': 1.0675700679030342e-07}, {'preci..." type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>\n${counter}\n</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${json["data"][${counter}]}</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${json["data"][${counter}]}</arg>
+<arg>id=the new value</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${json_string}</arg>
+<arg>precision</arg>
+</arguments>
+<status status="PASS" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<kw>
+<assign>
+<var>${counter}=</var>
+<var>${counter+1}</var>
+</assign>
+<msg timestamp="20170928 16:58:41.115" level="FAIL">Keyword name cannot be empty.</msg>
+<status status="FAIL" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<status status="FAIL" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<status status="FAIL" starttime="20170928 16:58:41.115" endtime="20170928 16:58:41.115"></status>
+</kw>
+<status status="FAIL" starttime="20170928 16:58:41.068" endtime="20170928 16:58:41.115" critical="yes">Keyword name cannot be empty.</status>
+</test>
+<status status="FAIL" starttime="20170928 16:58:40.363" endtime="20170928 16:58:41.131"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="1">Critical Tests</stat>
-<stat fail="0" pass="1">All Tests</stat>
+<stat pass="1" fail="1">Critical Tests</stat>
+<stat pass="1" fail="1">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="Demo" pass="1">Demo</stat>
+<stat pass="1" fail="1" id="s1" name="testsTemplate">testsTemplate</stat>
 </suite>
 </statistics>
 <errors>
+<msg timestamp="20170928 16:58:40.631" level="ERROR">Error in file 'C:\Users\Martti Parikka\Omat tiedostot\arcadaDevOps\ordersNew\orders\demo\src\main\java\com\example\demo\testsTemplate.robot': Importing test library 'HttpLibrary.HTTP' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\Martti Parikka\AppData\Local\Programs\Python\Python36-32\python36.zip
+  C:\Users\Martti Parikka\AppData\Local\Programs\Python\Python36-32\DLLs
+  C:\Users\Martti Parikka\AppData\Local\Programs\Python\Python36-32\lib
+  C:\Users\Martti Parikka\AppData\Local\Programs\Python\Python36-32
+  C:\Users\Martti Parikka\AppData\Local\Programs\Python\Python36-32\lib\site-packages</msg>
 </errors>
 </robot>
