@@ -26,24 +26,43 @@ public class OrdersController {
         //System.out.println(requestDTO.getAuthToken());
         if(!requestDTO.getAuthToken().equals(null)){
             String[] AuthCheck = checkAuth(requestDTO.getAuthToken());
-            System.out.println(AuthCheck[2]);
-            String productCheck = checkProducts(requestDTO.getProductId());
-            System.out.println(productCheck);
+            //System.out.println(AuthCheck[2]);
+            if(AuthCheck[2] != "401"){
 
+                if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
 
-            if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
-                ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
+                    String productCheck = checkProducts(requestDTO.getProductId());
+                //System.out.println(productCheck);
+                    if(productCheck != "401" || Double.parseDouble(productCheck) >= 0){
 
-                return new OrdersResponseDTO(ResponseCode.OK);
-            }
-            else{
-                return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "ID, StoreID or Amount was not set");
+                        int storesCheck = checkStores(Integer.parseInt(requestDTO.getStoreId()), Integer.parseInt(requestDTO.getProductId()));
 
+                        if(storesCheck == 1){
+
+                            ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
+
+                            return new OrdersResponseDTO(ResponseCode.OK);
+
+                        }else{
+                            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "That product can't be found in that store!");
+                        }
+
+                    }else{
+                        return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "Price was not found");
+                    }
+
+                }else{
+                    return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "ID, StoreID or Amount was not set");
+
+                }
+
+            }else{
+                return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "Auth token was not recognised");
             }
 
         }
         else{
-            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST);
+            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token");
 
         }
     }
@@ -109,6 +128,41 @@ public class OrdersController {
         }
 
     }
+
+
+    public int checkStores(int storeId, int productId){
+        //String uri = "http://stores.arcada.nitor.zone/api/stores_with_product.php?product=" + productId;
+
+        String uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
+
+
+        String input = "";
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(input, headers);
+
+        ResponseEntity<StoresResponseDTO> response = restTemplate.exchange(uri, HttpMethod.POST, entity, StoresResponseDTO.class);
+
+
+
+        ///gets price from json
+        int stores = response.getBody().stores.get(storeId).id;
+        System.out.println(stores);
+        if(stores == storeId){
+            System.out.println("The store has that product");
+            return 1;
+        }else{
+            return 0;
+
+        }
+
+    }
+
+
 
     /*@GetMapping(value ="/all")
     public List<Orders> findAll(){
