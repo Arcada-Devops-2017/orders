@@ -15,14 +15,15 @@ public class OrdersApplication {
 
         OrdersJpaRepository repository = ctx.getBean(OrdersJpaRepository.class);
 
-        Orders order = new Orders();
 
-        order.setProductId("1");
+        /*Orders order = new Orders();
+
+        order.setProductId(1);
         order.setProductAmount(1);
         order.setAuthToken("foobar");
 
 
-        repository.save(order);
+        repository.save(order);*/
 
     }
 }

@@ -23,25 +23,27 @@ public class OrdersController {
 
     @PostMapping(value = "/PostData")
     public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
-        //System.out.println(requestDTO.getAuthToken());
+        System.out.println(requestDTO.getAuthToken());
         if(!requestDTO.getAuthToken().equals(null)){
             String[] AuthCheck = checkAuth(requestDTO.getAuthToken());
-            //System.out.println(AuthCheck[2]);
+            System.out.println(AuthCheck[2]);
             if(AuthCheck[2] != "401"){
 
                 if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
 
                     String productCheck = checkProducts(requestDTO.getProductId());
-                //System.out.println(productCheck);
+                System.out.println(productCheck);
                     if(productCheck != "401" || Double.parseDouble(productCheck) >= 0){
 
                         int storesCheck = checkStores(Integer.parseInt(requestDTO.getStoreId()), Integer.parseInt(requestDTO.getProductId()));
 
                         if(storesCheck == 1){
 
-                            ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
+                            //ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
 
-                            return new OrdersResponseDTO(ResponseCode.OK);
+
+
+                            return new OrdersResponseDTO(ResponseCode.OK, "It works");
 
                         }else{
                             return new OrdersResponseDTO(ResponseCode.BAD_REQUEST, "That product can't be found in that store!");
@@ -147,18 +149,22 @@ public class OrdersController {
 
         ResponseEntity<StoresResponseDTO> response = restTemplate.exchange(uri, HttpMethod.POST, entity, StoresResponseDTO.class);
 
+        int stores;
 
 
-        ///gets price from json
-        int stores = response.getBody().stores.get(storeId).id;
-        System.out.println(stores);
-        if(stores == storeId){
-            System.out.println("The store has that product");
-            return 1;
-        }else{
-            return 0;
+        for(int i = 0; i < response.getBody().stores.size(); i++){
+            stores = response.getBody().stores.get(i).id;
 
+            if(stores == storeId){
+                System.out.println("The store has that product");
+                return 1;
+            }
         }
+
+        //stores = response.getBody().stores.get(storeId).id;
+        //System.out.println(stores);
+
+        return 0;
 
     }
 
