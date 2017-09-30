@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface OrdersJpaRepository extends JpaRepository<Orders, Long> {
-    Orders findByAuthToken(String authToken);
-    //Orders setStoreId (String storeId);
-    //Orders setProductId (String productId);
-    //Orders setProductAmount (int productAmount);
+    //Orders findByAuthToken(String authToken);
+     Orders findByUserName(String userName);
+
 }

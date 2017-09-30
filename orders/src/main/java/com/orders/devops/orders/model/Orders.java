@@ -9,10 +9,10 @@ import javax.persistence.Id;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderId;
-    private Long productId;
+    private long orderId;
+    private long productId;
     private int productAmount;
-    private Long storeId;
+    private long storeId;
     private String authToken;
     private double orderPrice;
     private boolean userConfirmed;
@@ -28,9 +28,7 @@ public class Orders {
     }
 
 
-    public long getOrderId() {
-        return orderId;
-    }
+    public long getOrderId() { return orderId; }
 
     public void setOrderId(long orderId) {
         this.orderId = orderId;
@@ -52,7 +50,7 @@ public class Orders {
         this.productAmount = productAmount;
     }
 
-    public double getStoreId() {
+    public long getStoreId() {
         return storeId;
     }
 

@@ -3,6 +3,7 @@ package com.orders.devops.orders.controller;
 import com.orders.devops.orders.model.Orders;
 import com.orders.devops.orders.repository.OrdersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/api")
@@ -20,7 +23,7 @@ public class OrdersController {
 
 
     private Logger logger = Logger.getLogger(OrdersController.class.getName());
-
+    @CrossOrigin(origins ="*")
     @PostMapping(value = "/PostData")
     public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
         //System.out.println(requestDTO.getAuthToken());
@@ -39,7 +42,7 @@ public class OrdersController {
 
                         if(storesCheck == 1){
 
-                            //ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
+                            ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
 
 
 
@@ -167,6 +170,46 @@ public class OrdersController {
         return 0;
 
     }
+
+
+    //This section is for sending data
+
+    //Search from database information
+    @CrossOrigin(origins = "*")
+    @GetMapping(value= "/FetchAll")
+    public OrdersResponseDTO findByUserName(@RequestParam ("authToken") String authToken){
+
+
+        if(!authToken.equals(null)) {
+            String[] AuthCheck = checkAuth(authToken);
+
+            if(AuthCheck[2] != "401"){
+
+               OrdersJpaRepository.findByUserName(AuthCheck[2]);
+
+
+                return new OrdersResponseDTO(ResponseCode.OK, "It works");
+
+            }else{
+                return new OrdersResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token");
+            }
+
+        }else{
+            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token");
+        }
+
+        //return ordersJpaRespository.findByAuthToken(authToken);
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
