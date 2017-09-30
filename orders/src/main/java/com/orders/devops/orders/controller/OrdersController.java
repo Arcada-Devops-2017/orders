@@ -23,16 +23,16 @@ public class OrdersController {
 
     @PostMapping(value = "/PostData")
     public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
-        System.out.println(requestDTO.getAuthToken());
+        //System.out.println(requestDTO.getAuthToken());
         if(!requestDTO.getAuthToken().equals(null)){
             String[] AuthCheck = checkAuth(requestDTO.getAuthToken());
-            System.out.println(AuthCheck[2]);
+           // System.out.println(AuthCheck[2]);
             if(AuthCheck[2] != "401"){
 
                 if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
 
                     String productCheck = checkProducts(requestDTO.getProductId());
-                System.out.println(productCheck);
+               // System.out.println(productCheck);
                     if(productCheck != "401" || Double.parseDouble(productCheck) >= 0){
 
                         int storesCheck = checkStores(Integer.parseInt(requestDTO.getStoreId()), Integer.parseInt(requestDTO.getProductId()));
