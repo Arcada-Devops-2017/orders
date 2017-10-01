@@ -1,9 +1,14 @@
 package com.orders.devops.orders.model;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Orders {
@@ -17,6 +22,7 @@ public class Orders {
     private double orderPrice;
     private boolean userConfirmed;
     private String userName;
+    private String orderDate;
 
 
 
@@ -85,4 +91,12 @@ public class Orders {
     public String getUserName() { return userName; }
 
     public void setUserName(String userName) { this.userName = userName; }
+
+    public void setOrderDate(){
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        this.orderDate =  sdf.format(date);
+    };
+    public String getOrderDate(){return orderDate;}
+
 }

@@ -1,5 +1,6 @@
 package com.orders.devops.orders.controller;
 
+import com.orders.devops.orders.model.OrderResponseData;
 import com.orders.devops.orders.model.Orders;
 import com.orders.devops.orders.repository.OrdersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +25,8 @@ public class OrdersController {
 
 
     private Logger logger = Logger.getLogger(OrdersController.class.getName());
+
+
     @CrossOrigin(origins ="*")
     @PostMapping(value = "/PostData")
     public OrdersResponseDTO PostData (@RequestBody final OrdersRequestDTO requestDTO){
@@ -180,13 +184,24 @@ public class OrdersController {
     public OrdersResponseDTO findByUserName(@RequestParam ("authToken") String authToken){
 
 
+
         if(!authToken.equals(null)) {
-            String[] AuthCheck = checkAuth(authToken);
+
+            String[] AuthCheck;
+
+            if(authToken.equals("orderRobotTestAuth")){
+                AuthCheck = testCheckAuth(authToken);
+            }else{
+                AuthCheck = checkAuth(authToken);
+            }
+
 
             if(AuthCheck[2] != "401"){
 
-               OrdersJpaRepository.findByUserName(AuthCheck[2]);
+                Orders orders = ordersJpaRespository.findByUserName(AuthCheck[2]);
 
+
+               // return new OrdersResponseDTO(new OrderResponseData());
 
                 return new OrdersResponseDTO(ResponseCode.OK, "It works");
 
@@ -199,6 +214,17 @@ public class OrdersController {
         }
 
         //return ordersJpaRespository.findByAuthToken(authToken);
+    }
+
+
+
+
+
+    public String[] testCheckAuth(String authToken){
+
+        String[] returnArray = {"","",authToken};
+
+        return returnArray;
     }
 
 

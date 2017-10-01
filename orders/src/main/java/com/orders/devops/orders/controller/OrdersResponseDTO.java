@@ -1,8 +1,12 @@
 package com.orders.devops.orders.controller;
 
-public class OrdersResponseDTO {
+import com.orders.devops.orders.model.OrderResponseData;
+
+
+public class OrdersResponseDTO  {
     public ResponseCode code;
     public String message;
+
 
     public OrdersResponseDTO(ResponseCode code){
         this.code = code;
@@ -12,4 +16,9 @@ public class OrdersResponseDTO {
         this.code = code;
         this.message = message;
     }
+
+
+
+
+
 }
