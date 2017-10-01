@@ -16,12 +16,12 @@ Get page and test if string exists
 
 Dictionary contains key
     log to console      \nStarting JSON\n${resp.json()}
-    
+
     ${jsonstring}=     catenate
     ...  ${resp.json()}
-    
+
     ${json_string}=     Replace String      ${jsonstring}       '       "
-  
+
 
     log to console       \nConverted JSON:\n${json_string}
     ${json}=             evaluate        json.loads('''${json_string}''')    json
@@ -29,7 +29,7 @@ Dictionary contains key
     ${json_string}=      evaluate        json.dumps(${json})                 json
     Dictionary Should Contain Key     ${json_string}        orderId
     Dictionary Should Contain Key     ${json_string}        orderDate
-    
+
     log to console      \nFound key\n
 
 *** comments ***
@@ -45,12 +45,12 @@ Get page and test if string exists
 
 Dictionary contains key
     log to console      \nStarting JSON\n${resp.json()}
-    
+
     ${jsonstring}=     catenate
     ...  ${resp.json()}
-    
+
     ${json_string}=     Replace String      ${jsonstring}       '       "
-  
+
 
     log to console       \nConverted JSON:\n${json_string}
     ${json}=             evaluate        json.loads('''${json_string}''')    json
