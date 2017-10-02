@@ -38,11 +38,11 @@ public class OrdersController {
 
                 if(!requestDTO.getProductId().equals(null) && !requestDTO.getStoreId().equals(null) && requestDTO.getProductAmount() != 0) {
 
-                    String productCheck = checkProducts(requestDTO.getProductId());
+                    String productCheck = checkProducts(requestDTO.getProductId(), requestDTO.getAuthToken());
                // System.out.println(productCheck);
                     if(productCheck != "401" || Double.parseDouble(productCheck) >= 0){
 
-                        int storesCheck = checkStores(Integer.parseInt(requestDTO.getStoreId()), Integer.parseInt(requestDTO.getProductId()));
+                        int storesCheck = checkStores(Integer.parseInt(requestDTO.getStoreId()), Integer.parseInt(requestDTO.getProductId()), requestDTO.getAuthToken());
 
                         if(storesCheck == 1){
 
@@ -77,9 +77,17 @@ public class OrdersController {
     }
 
     public String[] checkAuth(String authToken){
-        //String uri = "auth.arcada.nitor.zone/userinfo.php";
         //The url where to get json from
-        String uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+        String uri;
+
+        if(authToken.equals("orderRobotTestAuth")){
+            //System.out.println("hello");
+            uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+        }else{
+            //uri = "auth.arcada.nitor.zone/userinfo.php";
+            uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+        }
+
         //What json is sent to the url
         String input = "{\"token\":\""+ authToken +"\"}";
 
@@ -106,10 +114,17 @@ public class OrdersController {
     }//checkAuth Ends.
 
     //ToDo test if json data fetching is correct
-    public String checkProducts(String productId){
-        //String uri = "http://product.arcada.nitor.zone/api/products.php?id=" + productId;
+    public String checkProducts(String productId, String authToken){
 
-        String uri = "https://people.arcada.fi/~santanej/test/test/products.json";
+        String uri;
+
+        if(authToken.equals("orderRobotTestAuth")){
+            //System.out.println("World");
+            uri = "https://people.arcada.fi/~santanej/test/test/products.json";
+        }else{
+            //uri = "http://product.arcada.nitor.zone/api/products.php?id=" + productId;
+            uri = "https://people.arcada.fi/~santanej/test/test/products.json";
+        }
 
 
         String input = "";
@@ -139,10 +154,16 @@ public class OrdersController {
     }
 
 
-    public int checkStores(int storeId, int productId){
-        //String uri = "http://stores.arcada.nitor.zone/api/stores_with_product.php?product=" + productId;
+    public int checkStores(int storeId, int productId, String authToken){
+        String uri;
 
-        String uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
+        if(authToken.equals("orderRobotTestAuth")){
+            //System.out.println("!!!!");
+            uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
+        }else{
+            //uri = "http://stores.arcada.nitor.zone/api/stores_with_product.php?product=" + productId;
+            uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
+        }
 
 
         String input = "";
@@ -183,17 +204,9 @@ public class OrdersController {
     @GetMapping(value= "/FetchAll")
     public OrdersResponseDTO findByUserName(@RequestParam ("authToken") String authToken){
 
-
-
         if(!authToken.equals(null)) {
 
-            String[] AuthCheck;
-
-            if(authToken.equals("orderRobotTestAuth")){
-                AuthCheck = testCheckAuth(authToken);
-            }else{
-                AuthCheck = checkAuth(authToken);
-            }
+            String[] AuthCheck = checkAuth(authToken);
 
 
             if(AuthCheck[2] != "401"){
@@ -215,18 +228,6 @@ public class OrdersController {
 
         //return ordersJpaRespository.findByAuthToken(authToken);
     }
-
-
-
-
-
-    public String[] testCheckAuth(String authToken){
-
-        String[] returnArray = {"","",authToken};
-
-        return returnArray;
-    }
-
 
 
 
