@@ -52,12 +52,31 @@ public class OrdersController {
                         if(storesCheck == 1){
 
                             if(requestDTO.getAuthToken().equals("orderRobotTestAuth")){
-                                ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
+                                Orders order = new Orders();
+                                order.setAuthToken("orderRobotTestAuth");
+                                order.setUserName(AuthCheck[2]);
+                                order.setProductId(Long.parseLong(requestDTO.getProductId()));
+                                order.setProductAmount(requestDTO.getProductAmount());
+                                order.setStoreId(Long.parseLong(requestDTO.getStoreId()));
+                                order.setUserConfirmed(true);
+                                order.setOrderDate();
+                                ordersJpaRespository.save(order);
+
                                 return new OrdersResponseDTO(ResponseCode.OK, "Username: " + AuthCheck[2]+ ", ProductId: " + Long.parseLong(requestDTO.getProductId()) + ", ProductAmount: " + requestDTO.getProductAmount() + ", StoreId: " + Long.parseLong(requestDTO.getStoreId()) + ", ProductPrice: " +Double.parseDouble(productCheck));
 
                             }else{
-                                ordersJpaRespository.save(new Orders(AuthCheck[2],Long.parseLong(requestDTO.getProductId()),requestDTO.getProductAmount(),Long.parseLong(requestDTO.getStoreId()),Double.parseDouble(productCheck)));
-                                return new OrdersResponseDTO(ResponseCode.OK, "It works");
+                                Orders order = new Orders();
+                                order.setUserName(AuthCheck[2]);
+                                order.setProductId(Long.parseLong(requestDTO.getProductId()));
+                                order.setProductAmount(requestDTO.getProductAmount());
+                                order.setStoreId(Long.parseLong(requestDTO.getStoreId()));
+                                order.setUserConfirmed(true);
+                                order.setOrderDate();
+                                ordersJpaRespository.save(order);
+
+
+                                return new OrdersResponseDTO(ResponseCode.OK, "Username: " + AuthCheck[2]+ ", ProductId: " + Long.parseLong(requestDTO.getProductId()) + ", ProductAmount: " + requestDTO.getProductAmount() + ", StoreId: " + Long.parseLong(requestDTO.getStoreId()) + ", ProductPrice: " +Double.parseDouble(productCheck));
+
                             }
 
                         }else{

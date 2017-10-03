@@ -2,36 +2,33 @@ package com.orders.devops.orders.model;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class Orders {
-    @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private long orderId;
+    @Column
     private long productId;
+    @Column
     private int productAmount;
+    @Column
     private long storeId;
+    @Column
     private String authToken;
+    @Column
     private double orderPrice;
+    @Column
     private boolean userConfirmed;
+    @Column
     private String userName;
+    @Column
     private String orderDate;
-
-
-
-
-    protected Orders(){}
-
-    public Orders(String userName,long productId, int productAmount,long storeId,double orderPrice){
-
-    }
 
 
     public long getOrderId() { return orderId; }
