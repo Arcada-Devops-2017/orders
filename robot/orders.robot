@@ -5,7 +5,7 @@ Library     HttpLibrary.HTTP
 Library     String
 
 *** Variables ***
-${pageOrder}   http://localhost:8080   
+${pageOrder}   http://orders.arcada.nitor.zone
 
 *** Test Cases ***
 Get page and test if string exists

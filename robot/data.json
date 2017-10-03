@@ -1,0 +1,8 @@
+{
+    "authToken": "orderRobotTestAuth",
+    "product":{
+      "id": "1",
+      "storeId":"21",
+      "amount":"1"
+    }
+  }
