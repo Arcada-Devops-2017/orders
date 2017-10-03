@@ -7,7 +7,7 @@ before_install:
     - sudo pip install -r robot/requirements.txt
 	- chmod +x gradlew
 install:
-    - sudo "./gradlew bootRepackage"
+    - "./gradlew bootRepackage"
 before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
