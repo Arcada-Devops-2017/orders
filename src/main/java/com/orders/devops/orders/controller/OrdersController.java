@@ -225,7 +225,7 @@ public class OrdersController {
                // return new OrdersResponseDTO(new OrderResponseData());
                 //new OrderData(12, "01.02.2017", 99, 2.0, 10, 88);
 
-                String message = "";
+                /*String message = "";
                 JSONObject json = new JSONObject();
                 JSONArray array = new JSONArray();
                 JSONObject item = new JSONObject();
@@ -248,7 +248,7 @@ public class OrdersController {
                     message = json.toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
 
                 return orders.toString();
