@@ -1,8 +1,13 @@
 package com.orders.devops.orders.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.orders.devops.orders.model.OrderData;
 import com.orders.devops.orders.model.OrderResponseData;
 import com.orders.devops.orders.model.Orders;
 import com.orders.devops.orders.repository.OrdersJpaRepository;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.*;
@@ -201,8 +206,8 @@ public class OrdersController {
 
     //Search from database information
     @CrossOrigin(origins = "*")
-    @GetMapping(value= "/FetchAll")
-    public OrdersResponseDTO findByUserName(@RequestParam ("authToken") String authToken){
+    @GetMapping(value= "/FetchAll", produces = "application/json")
+    public String findByUserName(@RequestParam ("authToken") String authToken){
 
         if(!authToken.equals(null)) {
 
@@ -212,18 +217,48 @@ public class OrdersController {
             if(AuthCheck[2] != "401"){
 
                 Orders orders = ordersJpaRespository.findByUserName(AuthCheck[2]);
-
+                //System.out.println(orders);
 
                // return new OrdersResponseDTO(new OrderResponseData());
+                //new OrderData(12, "01.02.2017", 99, 2.0, 10, 88);
 
-                return new OrdersResponseDTO(ResponseCode.OK, "It works");
+                String message = "";
+                JSONObject json = new JSONObject();
+                JSONArray array = new JSONArray();
+                JSONObject item = new JSONObject();
+                JSONObject product = new JSONObject();
+
+                try {
+                    item.put("orderId", 2);
+                    item.put("orderDate", "12.12.2017");
+
+
+                    product.put("id", 15);
+                    product.put("storeId", 99);
+                    product.put("amount", 900);
+                    product.put("price", 20);
+                    item.put("product", product);
+
+                    array.put(item);
+
+                    json.put("orderData", array);
+                    message = json.toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                return orders.toString();
+                //return new FrontEndResponseDTO(ResponseCode.OK, message , "hello World!!");
 
             }else{
-                return new OrdersResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token");
+                return "";
+                //return new FrontEndResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token", null);
             }
 
         }else{
-            return new OrdersResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token");
+            return "this shit";
+            //return new FrontEndResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token", null);
         }
 
         //return ordersJpaRespository.findByAuthToken(authToken);
