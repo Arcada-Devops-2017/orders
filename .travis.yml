@@ -5,6 +5,7 @@ addons:
   firefox: 55.0.3
 before_install:
     - sudo pip install -r robot/requirements.txt
+	- chmod +x gradlew
 install:
     - sudo "./gradlew bootRepackage"
 before_script:
