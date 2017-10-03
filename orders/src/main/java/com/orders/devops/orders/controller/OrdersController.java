@@ -252,12 +252,12 @@ public class OrdersController {
                 //return new FrontEndResponseDTO(ResponseCode.OK, message , "hello World!!");
 
             }else{
-                return "";
+                return "Could not find the username";
                 //return new FrontEndResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token", null);
             }
 
         }else{
-            return "this shit";
+            return "No auth token";
             //return new FrontEndResponseDTO(ResponseCode.BAD_REQUEST,"No Auth token", null);
         }
 
