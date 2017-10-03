@@ -89,8 +89,8 @@ public class OrdersController {
             //System.out.println("hello");
             uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
         }else{
-            //uri = "auth.arcada.nitor.zone/userinfo.php";
-            uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
+            uri = "auth.arcada.nitor.zone/userinfo.php";
+            //uri = "https://people.arcada.fi/~santanej/test/test/auth.json";
         }
 
         //What json is sent to the url
@@ -127,8 +127,8 @@ public class OrdersController {
             //System.out.println("World");
             uri = "https://people.arcada.fi/~santanej/test/test/products.json";
         }else{
-            //uri = "http://product.arcada.nitor.zone/api/products.php?id=" + productId;
-            uri = "https://people.arcada.fi/~santanej/test/test/products.json";
+            uri = "http://product.arcada.nitor.zone/api/products.php?id=" + productId;
+            //uri = "https://people.arcada.fi/~santanej/test/test/products.json";
         }
 
 
@@ -166,8 +166,8 @@ public class OrdersController {
             //System.out.println("!!!!");
             uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
         }else{
-            //uri = "http://stores.arcada.nitor.zone/api/stores_with_product.php?product=" + productId;
-            uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
+            uri = "http://stores.arcada.nitor.zone/api/stores_with_product.php?product=" + productId;
+            //uri = "https://people.arcada.fi/~santanej/test/test/stores.json";
         }
 
 
