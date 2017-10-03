@@ -3,6 +3,11 @@ jdk:
 - openjdk8
 addons:
   firefox: 55.0.3
+
+env:
+  global:
+    secure: AAAAB3NzaC1yc2EAAAADAQABAAABAQDDa+m4VPMl7fFK3EvxGGSwRRahB3z5uwuyktjqd92kbbmxyr68ouJM6D2EW60G/ZbJOCE2Io52IlgGntmly0u5FV8StpTDOMiuIHWKXfdJrhCkiH6+UqhPSWnM88Oa+8ce723BN9phVDCKHTqb673iOWwiu5KT1sxEC5ZCId4ckVv8JRkP2QRcNvvHDErn8b6K0GMDBICPoDPm0H8VsCWg7O6joSyAFinA9DnEXieAHOINELx6yEP6ve0AtGx3pzSfeFNvMo7VYiZD9WtPuEjjNiShyCpPgcvcHSagEiVnMmLmb9ZmyryTr8jFgcGS/KnNNrNwuCrqed6gOeoExY1n 
+
 before_install:
     - sudo pip install -r robot/requirements.txt
     - chmod +x gradlew
