@@ -48,9 +48,3 @@ Post Orders
      ${file}=  To Json  ${resp.json()['files']['file']}
      Dictionary Should Contain Key  ${file}  200
      Dictionary Should Contain Key  ${file}  OK
- 
- -*** comments ***
- 
- Testing
- working copy
- 
