@@ -18,7 +18,7 @@ before_script:
     - export PATH=$PATH:$PWD/geckodriver
 script:
     - "./gradlew test"
-    - java -jar build/libs/demo-0.0.1-SNAPSHOT.jar --demo.mock=true &> /dev/null &
+    - java -jar build/libs/orders-0.0.1-SNAPSHOT.jar &> /dev/null &
     - sleep 20
     - pybot robot
 before_deploy:
@@ -28,7 +28,7 @@ before_deploy:
 deploy:
     - provider: script
       skip_cleanup: true
-      script: scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i orders build/libs/demo-0.0.1-SNAPSHOT.jar ubuntu@orders.arcada.nitor.zone:app.jar
+      script: scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i orders build/libs/orders-0.0.1-SNAPSHOT.jar ubuntu@orders.arcada.nitor.zone:app.jar
       on:
         branch: master
     - provider: script
