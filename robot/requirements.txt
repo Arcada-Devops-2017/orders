@@ -1,4 +1,4 @@
 robotframework==3.0.2
--U requests
--U robotframework-requests
---upgrade robotframework-httplibrary
+requests==2.18.4
+robotframework-requests==0.4.7
+robotframework-httplibrary==0.4.2
