@@ -238,7 +238,7 @@ public class OrdersController {
 
             if(AuthCheck[2] != "401"){
 
-                Orders orders = ordersJpaRespository.findByUserName(AuthCheck[2]);
+                //Orders orders = ordersJpaRespository.findByUserName(AuthCheck[2]);
                 //System.out.println(orders);
 
                // return new OrdersResponseDTO(new OrderResponseData());
@@ -270,7 +270,7 @@ public class OrdersController {
                 }
 
 
-                return orders.toString();
+                return message;
                 //return new FrontEndResponseDTO(ResponseCode.OK, message , "hello World!!");
 
             }else{
