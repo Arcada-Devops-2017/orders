@@ -27,11 +27,11 @@ before_deploy:
 deploy:
     - provider: script
       skip_cleanup: true
-      script: scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i sshOrders build/libs/orders-0.0.1-SNAPSHOT.jar ubuntu@orders.arcada.nitor.zone:app.jar
+      script: scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i sshOrders build/libs/orders-0.0.1-SNAPSHOT.jar orders@orders.arcada.nitor.zone:app.jar
       on:
         branch: master
     - provider: script
       skip_cleanup: true
-      script: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -tt -i sshOrders ubuntu@orders.arcada.nitor.zone /home/ubuntu/restartApp.sh
+      script: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -tt -i sshOrders orders@orders.arcada.nitor.zone /home/ubuntu/restartApp.sh
       on:
         branch: master
